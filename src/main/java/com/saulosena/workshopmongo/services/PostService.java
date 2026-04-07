@@ -1,5 +1,6 @@
 package com.saulosena.workshopmongo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,13 @@ public class PostService {
 	@Autowired
 	private PostRepository repo;
 	
-		public Post findById(String id) {
+	public Post findById(String id) {
 		Optional<Post> post = repo.findById(id);
 		return post.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 	
-	
+	public List<Post> findByTitle(String title){
+		return repo.findByTitleContainingIgnoreCase(title);
+	}
 	
 }
